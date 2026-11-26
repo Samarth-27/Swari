@@ -37,7 +37,11 @@ class SentryService {
   }
 
   captureMessage(message, level = 'info', context = {}) {
-    logger[level] ? logger[level]({ sentryMock: true, context }, message) : logger.info(context, message);
+    if (logger[level]) {
+      logger[level]({ sentryMock: true, context }, message);
+    } else {
+      logger.info(context, message);
+    }
   }
 }
 

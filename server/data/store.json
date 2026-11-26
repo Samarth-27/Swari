@@ -4112,45 +4112,13 @@
       "origin": "Bengaluru (Silk Board Junction)",
       "destination": "Chennai (Guindy Kathipara)",
       "departureTime": "Tomorrow, 07:00 AM",
-      "seatsAvailable": 0,
+      "seatsAvailable": 2,
       "totalSeats": 3,
       "pricePerSeat": 590,
       "womenOnly": true,
       "status": "ACTIVE_AVAILABLE",
-      "passengers": [
-        "Dr. Ananya Subramanian",
-        "Swari Operations & Safety Command HQ"
-      ],
-      "bookedPassengers": [
-        {
-          "bookingId": "BK-3718",
-          "name": "Dr. Ananya Subramanian",
-          "phone": "+91 94432-88312",
-          "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
-          "company": "Verified Professional",
-          "rating": 4.98,
-          "isAadhaarVerified": true,
-          "bookedAt": "12:48 am",
-          "seats": 1,
-          "fare": 590,
-          "escrowStatus": "SECURED_ESCROW"
-        },
-        {
-          "bookingId": "BK-2154",
-          "id": "USR-9312",
-          "passengerId": "USR-9312",
-          "name": "Swari Operations & Safety Command HQ",
-          "phone": "+91 80-2800-SWARI",
-          "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-          "company": "Verified Professional",
-          "rating": 5,
-          "isAadhaarVerified": true,
-          "bookedAt": "01:05 pm",
-          "seats": 1,
-          "fare": 590,
-          "escrowStatus": "SECURED_ESCROW"
-        }
-      ],
+      "passengers": [],
+      "bookedPassengers": [],
       "pendingRequests": [],
       "twoWayRatings": [
         {
@@ -5379,7 +5347,8 @@
           "passengerName": "Swari Operations & Safety Command HQ",
           "timestamp": "2026-11-25T07:35:22.166Z"
         }
-      ]
+      ],
+      "bookingMode": "ON_REQUEST"
     }
   ],
   "broadcasts": [

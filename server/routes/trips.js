@@ -388,6 +388,9 @@ router.post('/:id/approve-booking', validateBody(approveBookingSchema), idempote
       data: updated
     });
   } catch (err) {
+    if (err.code === 'NO_SEATS_AVAILABLE' || (err.message && err.message.includes('No seats available'))) {
+      return res.status(400).json({ success: false, error: 'NO_SEATS_AVAILABLE', message: err.message });
+    }
     res.status(500).json({ success: false, error: err.message });
   }
 });

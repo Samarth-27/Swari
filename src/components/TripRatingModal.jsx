@@ -3,23 +3,14 @@ import {
   X, 
   Star, 
   ShieldCheck, 
-  CheckCircle, 
   Sparkles, 
-  Heart, 
   ThumbsUp, 
   Car,
   User,
-  MessageSquare,
-  ArrowRightLeft,
-  Award
+  ArrowRightLeft
 } from 'lucide-react';
 
 export function TripRatingModal({ isOpen, onClose, trip, currentUser, onSubmitRating }) {
-  if (!isOpen || !trip) return null;
-
-  // Active view: 'RATE_PEER' (Submit your rating) vs 'MUTUAL_STATUS' (View reciprocal two-way ratings)
-  const [activeTab, setActiveTab] = useState('RATE_PEER');
-  
   // Rating Perspective: Auto-detect if user is Driver or Passenger
   const isUserDriver = currentUser?.role === 'DRIVER';
   const [ratingRole, setRatingRole] = useState(isUserDriver ? 'DRIVER' : 'PASSENGER');
@@ -47,12 +38,13 @@ export function TripRatingModal({ isOpen, onClose, trip, currentUser, onSubmitRa
     'Great Highway Etiquette'
   ];
 
-  const currentComplimentList = ratingRole === 'PASSENGER' ? driverCompliments : passengerCompliments;
   const [selectedTags, setSelectedTags] = useState(
     ratingRole === 'PASSENGER' 
       ? ['Smooth & Safe Driving', 'Punctual Pickup'] 
       : ['On Time at Pickup Spot', 'Respectful of Vehicle Rules']
   );
+
+  if (!isOpen || !trip) return null;
 
   const firstPassenger = trip.bookedPassengers?.[0]?.name || (typeof trip.passengers?.[0] === 'string' ? trip.passengers[0] : trip.passengers?.[0]?.name) || trip.passengerName || 'Passenger';
   const targetName = ratingRole === 'DRIVER' 

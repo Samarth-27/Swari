@@ -52,17 +52,17 @@ export function RideDetailsModal({
   const [passSerial, setPassSerial] = useState('');
   const [isSimulatingApprove, setIsSimulatingApprove] = useState(false);
 
-  if (!ride) return null;
-
-  const totalAmount = ride.pricePerSeat;
+  const totalAmount = ride?.pricePerSeat || 0;
   const fuelShare = Math.round(totalAmount * 0.78);
   const tollShare = totalAmount - fuelShare;
-  const currentTripId = ride.tripId || ride.id;
-  const isOnRequest = ride.bookingMode === 'ON_REQUEST';
-  const isInstant = ride.bookingMode !== 'ON_REQUEST';
+  const currentTripId = ride?.tripId || ride?.id || '';
+  const isOnRequest = ride?.bookingMode === 'ON_REQUEST';
+  const isInstant = ride?.bookingMode !== 'ON_REQUEST';
 
   // Real-Time Socket Listener: Automatically confirms when Host approves
   useEffect(() => {
+    if (!ride || !currentTripId) return;
+
     const unsubApprove = socketService.onBookingApproved((payload) => {
       if (payload && payload.tripId === currentTripId) {
         const myName = (currentUser?.fullName || '').toLowerCase().trim();
@@ -97,6 +97,8 @@ export function RideDetailsModal({
       unsubDecline?.();
     };
   }, [currentTripId, currentUser, bookingRef, selectedSeats, totalAmount, onConfirmBooking, ride]);
+
+  if (!ride) return null;
 
   const handleProceedToPayment = () => {
     if (hasActiveBooking) return;
