@@ -1,5 +1,17 @@
 async function checkJobs() {
-  const res = await fetch('https://api.github.com/repos/Samarth-27/Swari/actions/runs/45668582163/jobs', {
+  const runsRes = await fetch('https://api.github.com/repos/Samarth-27/Swari/actions/runs?per_page=3', {
+    headers: { 'User-Agent': 'Antigravity-CI-Checker' }
+  });
+  const runsData = await runsRes.json();
+  const latestRun = runsData.workflow_runs?.[0];
+  if (!latestRun) {
+    console.log('No workflow runs found.');
+    return;
+  }
+  console.log(`Latest Run: ${latestRun.id} | Commit: ${latestRun.head_sha.slice(0, 7)} | Status: ${latestRun.status} | Conclusion: ${latestRun.conclusion}`);
+  console.log(`Title: ${latestRun.display_title}\n`);
+
+  const res = await fetch(`https://api.github.com/repos/Samarth-27/Swari/actions/runs/${latestRun.id}/jobs`, {
     headers: { 'User-Agent': 'Antigravity-CI-Checker' }
   });
   const data = await res.json();

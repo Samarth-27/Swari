@@ -40,6 +40,11 @@ async function runFrontendHardeningTests() {
     const assetsPath = path.join(distPath, 'assets');
 
     if (!fs.existsSync(distPath) || !fs.existsSync(indexPath) || !fs.existsSync(assetsPath)) {
+      const { execSync } = await import('child_process');
+      execSync('npm run build', { cwd: ROOT_DIR, stdio: 'inherit' });
+    }
+
+    if (!fs.existsSync(distPath) || !fs.existsSync(indexPath) || !fs.existsSync(assetsPath)) {
       throw new Error(`Production dist artifacts missing in ${distPath}`);
     }
 
